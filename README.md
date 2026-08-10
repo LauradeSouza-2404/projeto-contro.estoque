@@ -1,4 +1,5 @@
-# Cultiva+ -> Projeto Controle de Defensivos Agrícolas
+# Cultiva+ 
+Projeto Controle de Defensivos Agrícolas
 
 ## 📌 Sobre o projeto
 
