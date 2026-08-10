@@ -1,30 +1,30 @@
-```plantuml
 @startuml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
-LAYOUT_WITH_LEGEND()
+!include <C4/C4_Container>
 
-title Diagrama de Contêiner - Sistema de Gestão Agropecuária
+title Diagrama de Contêiner - Sistema de Controle de Estoque e Rastreabilidade
 
-Person(produtor, "Produtor Rural", "Usuário responsável pelo gerenciamento das informações da propriedade.")
+Person(produtor, "Produtor Rural", "Responsável pelo cadastro dos lotes, controle dos insumos e registro das aplicações.")
 
-System_Boundary(sistema, "Sistema de Gestão Agropecuária") {
+System_Ext(fiscalizacao, "Órgãos de Fiscalização", "Órgãos que podem receber informações e relatórios relacionados às aplicações e ao uso de insumos.")
 
-    Container(frontend, "Interface Web", "HTML, CSS e JavaScript",
-        "Interface utilizada pelo produtor rural para cadastrar, consultar e gerenciar os dados do sistema.")
+System_Boundary(sistema, "Sistema de Controle de Estoque e Rastreabilidade") {
 
-    Container(backend, "Servidor Backend", "Python + Flask",
-        "Responsável pelas regras de negócio, processamento dos dados, cálculos de arrobas, controle de insumos e comunicação com o banco de dados.")
+    Container(frontend, "Interface Web", "HTML / CSS", "Telas utilizadas pelo produtor para cadastrar lotes, controlar insumos, registrar aplicações e consultar informações.")
 
-    ContainerDb(database, "Banco de Dados", "SQL",
-        "Armazena os dados de pesagens, insumos, movimentações e histórico do sistema.")
+    Container(backend, "Servidor Backend", "Python / Flask", "Processa as requisições, aplica as regras do sistema, controla o estoque e realiza a rastreabilidade dos lotes.")
+
+    ContainerDb(banco, "Banco de Dados", "SQLite", "Armazena produtores, lotes, insumos, aplicações, estoque e informações de rastreabilidade.")
 }
 
-Rel(produtor, frontend, "Acessa o sistema através do navegador")
+Rel(produtor, frontend, "Acessa as telas")
+
 Rel(frontend, backend, "Envia requisições HTTP")
-Rel(backend, frontend, "Retorna dados e resultados")
-Rel(backend, database, "Consulta e registra dados")
-Rel(database, backend, "Retorna informações")
+
+Rel(backend, frontend, "Retorna páginas e informações")
+
+Rel(backend, banco, "Consulta e armazena dados")
+
+Rel(backend, fiscalizacao, "Gera relatórios de rastreabilidade")
 
 @enduml
-```
