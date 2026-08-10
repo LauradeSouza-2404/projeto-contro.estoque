@@ -1,0 +1,13 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(produtor, "Produtor Rural")
+
+System(sistema, "Sistema de Controle de Estoque e Rastreabilidade")
+
+System_Ext(orgao, "Órgãos Fiscalizadores")
+
+Rel(produtor, sistema, "Registra estoque e aplicações")
+Rel(sistema, orgao, "Disponibiliza relatórios")
+
+@enduml
