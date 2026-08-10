@@ -1,0 +1,48 @@
+@startuml
+hide circle
+skinparam linetype ortho
+
+entity Usuario {
+  * id_usuario : INT <<PK>>
+  --
+  nome : VARCHAR(100)
+  email : VARCHAR(100)
+  senha : VARCHAR(255)
+}
+
+entity Defensivo {
+  * id_defensivo : INT <<PK>>
+  --
+  nome : VARCHAR(100)
+  principio_ativo : VARCHAR(100)
+  fabricante : VARCHAR(100)
+  quantidade_estoque : DECIMAL(10,2)
+  unidade : VARCHAR(20)
+  validade : DATE
+}
+
+entity Talhao {
+  * id_talhao : INT <<PK>>
+  --
+  nome : VARCHAR(50)
+  area_hectares : DECIMAL(8,2)
+  cultura : VARCHAR(50)
+}
+
+entity Aplicacao {
+  * id_aplicacao : INT <<PK>>
+  --
+  data_aplicacao : DATE
+  quantidade_utilizada : DECIMAL(10,2)
+  observacoes : TEXT
+
+  id_usuario : INT <<FK>>
+  id_talhao : INT <<FK>>
+  id_defensivo : INT <<FK>>
+}
+
+Usuario ||--o{ Aplicacao : registra
+Talhao ||--o{ Aplicacao : recebe
+Defensivo ||--o{ Aplicacao : utiliza
+
+@enduml
