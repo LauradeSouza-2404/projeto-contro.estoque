@@ -1,0 +1,30 @@
+```plantuml
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Diagrama de Contêiner - Sistema de Gestão Agropecuária
+
+Person(produtor, "Produtor Rural", "Usuário responsável pelo gerenciamento das informações da propriedade.")
+
+System_Boundary(sistema, "Sistema de Gestão Agropecuária") {
+
+    Container(frontend, "Interface Web", "HTML, CSS e JavaScript",
+        "Interface utilizada pelo produtor rural para cadastrar, consultar e gerenciar os dados do sistema.")
+
+    Container(backend, "Servidor Backend", "Python + Flask",
+        "Responsável pelas regras de negócio, processamento dos dados, cálculos de arrobas, controle de insumos e comunicação com o banco de dados.")
+
+    ContainerDb(database, "Banco de Dados", "SQL",
+        "Armazena os dados de pesagens, insumos, movimentações e histórico do sistema.")
+}
+
+Rel(produtor, frontend, "Acessa o sistema através do navegador")
+Rel(frontend, backend, "Envia requisições HTTP")
+Rel(backend, frontend, "Retorna dados e resultados")
+Rel(backend, database, "Consulta e registra dados")
+Rel(database, backend, "Retorna informações")
+
+@enduml
+```
