@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f3;
+    color: #333;
+}
+
+header {
+    background-color: #2e6b3e;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 5px;
+}
+
+header p {
+    font-size: 15px;
+}
+
+main {
+    width: 90%;
+    max-width: 1100px;
+    margin: 35px auto;
+}
+
+.titulo-pagina {
+    margin-bottom: 20px;
+}
+
+.titulo-pagina h2 {
+    color: #2e6b3e;
+    margin-bottom: 8px;
+}
+
+.titulo-pagina p {
+    color: #666;
+}
+
+.tabela-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #2e6b3e;
+    color: white;
+}
+
+th {
+    padding: 15px;
+    text-align: left;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background-color: #f0f5f1;
+}
+
+.status {
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.aplicado {
+    background-color: #d9f0dc;
+    color: #28733a;
+}
+
+.pendente {
+    background-color: #fff0c7;
+    color: #876600;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+}
+
+@media (max-width: 700px) {
+
+    main {
+        width: 95%;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+}
