@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Histórico</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Histórico de Movimentações</h1>
+        <p>Registro de entradas e saídas</p>
+    </header>
+
+    <div class="container">
+
+        <div class="voltar">
+
+            <a class="botao" href="/estoque">
+                ← Voltar para o estoque
+            </a>
+
+        </div>
+
+        {% if movimentacoes %}
+
+            {% for movimento in movimentacoes %}
+
+            <div class="talhao">
+
+                <h2>{{ movimento.produto }}</h2>
+
+                <p>
+                    <strong>Tipo:</strong>
+                    {{ movimento.tipo }}
+                </p>
+
+                <p>
+                    <strong>Quantidade:</strong>
+                    {{ movimento.quantidade }}
+                    {{ movimento.unidade }}
+                </p>
+
+                <p>
+                    <strong>Data:</strong>
+                    {{ movimento.data }}
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="card">
+
+                <h2>Nenhuma movimentação registrada</h2>
+
+                <p>
+                    As entradas e saídas realizadas aparecerão aqui.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

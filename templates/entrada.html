@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Entrada de Estoque</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Entrada de Estoque</h1>
+        <p>Adicionar quantidade ao estoque</p>
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+
+            <form method="POST">
+
+                <p>
+                    <label>Produto:</label><br>
+
+                    <select name="nome" required>
+
+                        {% for produto in produtos %}
+
+                        <option value="{{ produto.nome }}">
+                            {{ produto.nome }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+                </p>
+
+                <p>
+                    <label>Quantidade:</label><br>
+
+                    <input
+                        type="number"
+                        name="quantidade"
+                        min="1"
+                        required
+                    >
+                </p>
+
+                <button class="botao" type="submit">
+                    Registrar Entrada
+                </button>
+
+            </form>
+
+            <br>
+
+            <a class="botao" href="/estoque">
+                ← Voltar
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

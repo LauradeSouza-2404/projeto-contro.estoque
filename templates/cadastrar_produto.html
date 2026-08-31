@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Cadastrar Produto</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Cadastrar Produto</h1>
+        <p>Adicionar produto ao estoque</p>
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+
+            <form method="POST">
+
+                <p>
+                    <label>Nome do produto:</label><br>
+                    <input type="text" name="nome" required>
+                </p>
+
+                <p>
+                    <label>Categoria:</label><br>
+                    <input type="text" name="categoria" required>
+                </p>
+
+                <p>
+                    <label>Quantidade:</label><br>
+                    <input type="number" name="quantidade" required>
+                </p>
+
+                <p>
+                    <label>Unidade:</label><br>
+
+                    <select name="unidade">
+
+                        <option value="L">
+                            Litros (L)
+                        </option>
+
+                        <option value="kg">
+                            Quilogramas (kg)
+                        </option>
+
+                        <option value="un">
+                            Unidade
+                        </option>
+
+                    </select>
+
+                </p>
+
+                <button class="botao" type="submit">
+                    Cadastrar
+                </button>
+
+            </form>
+
+            <br>
+
+            <a class="botao" href="/estoque">
+                ← Voltar para o estoque
+            </a>
+            <a class="botao" href="/cadastrar-produto">
+                + Cadastrar Produto
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

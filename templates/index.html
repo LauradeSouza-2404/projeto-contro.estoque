@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Estoque</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Controle de Estoque e Rastreabilidade</h1>
+        <p>🌱 Sistema de Controle Agrícola</p>
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h2>Bem-vindo!</h2>
+
+            <p>
+                Sistema para controle de estoque,
+                dados do campo e rastreabilidade de produtos agrícolas.
+            </p>
+
+            <div class="menu">
+
+                <a class="botao" href="/dados-campo">
+                    Dados do Campo
+                </a>
+
+                <a class="botao" href="/estoque">
+                    Estoque
+                </a>
+
+                <a class="botao" href="/rastreabilidade">
+                    Rastreabilidade
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

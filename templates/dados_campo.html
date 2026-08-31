@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Dados do Campo</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Dados do Campo</h1>
+        <p>Informações dos talhões agrícolas</p>
+    </header>
+
+    <div class="container">
+
+        <div class="voltar">
+            <a class="botao" href="/">
+                ← Voltar
+            </a>
+        </div>
+
+        <div class="tabela-container">
+
+            <table class="tabela-campo">
+
+                <thead>
+                    <tr>
+                        <th>Talhão</th>
+                        <th>Cultura</th>
+                        <th>Defensivo</th>
+                        <th>Quantidade</th>
+                        <th>Data</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for item in dados %}
+
+                    <tr>
+
+                        <td>{{ item.talhao }}</td>
+
+                        <td>{{ item.cultura }}</td>
+
+                        <td>{{ item.defensivo }}</td>
+
+                        <td>{{ item.quantidade }}</td>
+
+                        <td>{{ item.data }}</td>
+
+                        <td>
+                            <span class="status">
+                                {{ item.status }}
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

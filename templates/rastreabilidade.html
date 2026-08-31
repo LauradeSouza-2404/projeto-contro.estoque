@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Rastreabilidade</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Rastreabilidade</h1>
+        <p>Histórico de aplicação dos produtos</p>
+    </header>
+
+    <div class="container">
+
+        <div class="voltar">
+            <a class="botao" href="/">
+                ← Voltar
+            </a>
+        </div>
+
+        {% for registro in registros %}
+
+        <div class="talhao">
+
+            <h2>{{ registro.talhao }}</h2>
+
+            <p>
+                <strong>Cultura:</strong>
+                {{ registro.cultura }}
+            </p>
+
+            <p>
+                <strong>Produto utilizado:</strong>
+                {{ registro.produto }}
+            </p>
+
+            <p>
+                <strong>Quantidade:</strong>
+                {{ registro.quantidade }}
+            </p>
+
+            <p>
+                <strong>Data da aplicação:</strong>
+                {{ registro.data }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{ registro.status }}
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+</html>

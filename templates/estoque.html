@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Estoque</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Controle de Estoque</h1>
+        <p>Produtos disponíveis</p>
+    </header>
+
+    <div class="container">
+
+        <div class="voltar">
+
+            <a class="botao" href="/">
+                ← Voltar
+            </a>
+
+            <a class="botao" href="/cadastrar-produto">
+                + Cadastrar Produto
+            </a>
+
+            <a class="botao" href="/entrada">
+                + Entrada
+            </a>
+
+            <a class="botao" href="/saida">
+                - Saída
+            </a>
+
+            <a class="botao" href="/historico">
+                📋 Histórico
+            </a>
+
+        </div>
+        {% for produto in produtos %}
+
+        <div class="talhao">
+
+            <h2>{{ produto.nome }}</h2>
+
+            <p>
+                <strong>Categoria:</strong>
+                {{ produto.categoria }}
+            </p>
+
+            <p>
+                <strong>Quantidade:</strong>
+                {{ produto.quantidade }} {{ produto.unidade }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{ produto.status }}
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+
+</html>
