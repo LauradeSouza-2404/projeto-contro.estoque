@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Cultiva+{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            🌱 Cultiva+
+        </div>
+
+        <nav>
+
+            <a href="{{ url_for('index') }}">
+                Início
+            </a>
+
+            <a href="{{ url_for('estoque') }}">
+                Estoque
+            </a>
+
+            <a href="{{ url_for('movimentacoes') }}">
+                Movimentações
+            </a>
+
+            <a href="{{ url_for('talhoes') }}">
+                Talhões
+            </a>
+
+            <a href="{{ url_for('aplicacoes') }}">
+                Aplicações
+            </a>
+
+            <a href="{{ url_for('listagem') }}">
+                Listagem
+            </a>
+
+            <a href="{{ url_for('historico') }}">
+                Histórico
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+        {% if mensagens %}
+
+        {% for categoria, mensagem in mensagens %}
+
+        <div class="alerta {{ categoria }}">
+            {{ mensagem }}
+        </div>
+
+        {% endfor %}
+
+        {% endif %}
+
+        {% endwith %}
+
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            Cultiva+ — Controle de Defensivos Agrícolas
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

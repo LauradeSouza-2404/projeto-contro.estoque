@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cultiva+ | Início
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div>
+
+        <h1>Bem-vindo ao Cultiva+</h1>
+
+        <p>
+            Controle de estoque, aplicações e rastreabilidade
+            dos defensivos agrícolas da sua propriedade.
+        </p>
+
+    </div>
+
+</section>
+
+
+<h2>Visão geral</h2>
+
+
+<div class="cards">
+
+    <div class="card">
+
+        <span class="icone">📦</span>
+
+        <h3>Produtos</h3>
+
+        <strong>
+            {{ total_produtos }}
+        </strong>
+
+        <p>Produtos cadastrados</p>
+
+    </div>
+
+
+    <div class="card">
+
+        <span class="icone">⚠️</span>
+
+        <h3>Estoque baixo</h3>
+
+        <strong>
+            {{ estoque_baixo }}
+        </strong>
+
+        <p>Produtos com pouca quantidade</p>
+
+    </div>
+
+
+    <div class="card">
+
+        <span class="icone">🌾</span>
+
+        <h3>Talhões</h3>
+
+        <strong>
+            {{ total_talhoes }}
+        </strong>
+
+        <p>Áreas cadastradas</p>
+
+    </div>
+
+
+    <div class="card">
+
+        <span class="icone">⏳</span>
+
+        <h3>Em carência</h3>
+
+        <strong>
+            {{ em_carencia }}
+        </strong>
+
+        <p>Aplicações em período de carência</p>
+
+    </div>
+
+</div>
+
+
+<section class="acoes">
+
+    <h2>Acesso rápido</h2>
+
+    <div class="botoes">
+
+        <a class="botao"
+           href="{{ url_for('cadastrar_produto') }}">
+            + Cadastrar produto
+        </a>
+
+        <a class="botao"
+           href="{{ url_for('movimentacoes') }}">
+            Registrar movimentação
+        </a>
+
+        <a class="botao"
+           href="{{ url_for('cadastrar_talhao') }}">
+            + Cadastrar talhão
+        </a>
+
+        <a class="botao"
+           href="{{ url_for('aplicacoes') }}">
+            Registrar aplicação
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

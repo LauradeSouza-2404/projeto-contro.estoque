@@ -1,0 +1,60 @@
+@startuml
+
+title Modelo de Banco de Dados - Controle de Estoque e Rastreabilidade
+
+entity PRODUTOR {
+    * id_produtor : INT <<PK>>
+    --
+    nome : VARCHAR(100)
+    cpf : VARCHAR(14)
+    telefone : VARCHAR(20)
+}
+
+entity LOTE {
+    * id_lote : INT <<PK>>
+    --
+    id_produtor : INT <<FK>>
+    nome_lote : VARCHAR(100)
+    area_hectares : DECIMAL(10,2)
+    data_cadastro : DATE
+}
+
+entity INSUMO {
+    * id_insumo : INT <<PK>>
+    --
+    nome : VARCHAR(100)
+    tipo : VARCHAR(50)
+    unidade : VARCHAR(20)
+    quantidade_estoque : DECIMAL(10,2)
+    validade : DATE
+}
+
+entity MOVIMENTACAO_ESTOQUE {
+    * id_movimentacao : INT <<PK>>
+    --
+    id_insumo : INT <<FK>>
+    tipo_movimentacao : VARCHAR(20)
+    quantidade : DECIMAL(10,2)
+    data_movimentacao : DATE
+}
+
+entity APLICACAO {
+    * id_aplicacao : INT <<PK>>
+    --
+    id_lote : INT <<FK>>
+    id_insumo : INT <<FK>>
+    data_aplicacao : DATE
+    quantidade : DECIMAL(10,2)
+    area_aplicada : DECIMAL(10,2)
+    observacao : VARCHAR(255)
+}
+
+PRODUTOR ||--o{ LOTE : possui
+
+LOTE ||--o{ APLICACAO : recebe
+
+INSUMO ||--o{ APLICACAO : utilizado_em
+
+INSUMO ||--o{ MOVIMENTACAO_ESTOQUE : possui
+
+@enduml

@@ -1,51 +1,383 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listagem - Sistema Agro</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+{% extends "base.html" %}
 
-<body>
+{% block title %}
+Cultiva+ | Listagem
+{% endblock %}
 
-    <header>
-        <h1>Sistema Agro</h1>
-        <nav>
-            <a href="/">Início</a>
-            <a href="/listagem">Listagem</a>
-        </nav>
-    </header>
+{% block content %}
 
-    <main>
-        <h2>Listagem de Produtos</h2>
+<div class="cabecalho-pagina">
+
+    <div>
+        <h1>📋 Listagem Geral</h1>
+
+        <p>
+            Consulte os produtos, talhões, movimentações
+            e aplicações cadastradas no Cultiva+.
+        </p>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     PRODUTOS
+===================================================== -->
+
+<section>
+
+    <h2>📦 Produtos em Estoque</h2>
+
+    <div class="tabela-container">
 
         <table>
+
             <thead>
+
                 <tr>
-                    <th>ID</th>
                     <th>Produto</th>
+                    <th>Princípio ativo</th>
+                    <th>Fabricante</th>
                     <th>Quantidade</th>
-                    <th>Preço</th>
-                    <th>Total</th>
+                    <th>Carência</th>
                 </tr>
+
             </thead>
 
             <tbody>
+
                 {% for produto in produtos %}
+
                 <tr>
-                    <td>{{ produto.id }}</td>
-                    <td>{{ produto.nome }}</td>
-                    <td>{{ produto.quantidade }}</td>
-                    <td>R$ {{ produto.preco }}</td>
-                    <td>R$ {{ produto.quantidade * produto.preco }}</td>
+
+                    <td>
+                        <strong>
+                            {{ produto.nome }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ produto.principio_ativo }}
+                    </td>
+
+                    <td>
+                        {{ produto.fabricante or "-" }}
+                    </td>
+
+                    <td>
+
+                        {% if produto.quantidade <= 10 %}
+
+                            <span class="estoque-baixo">
+                                ⚠️ {{ produto.quantidade }}
+                                {{ produto.unidade }}
+                            </span>
+
+                        {% else %}
+
+                            {{ produto.quantidade }}
+                            {{ produto.unidade }}
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {{ produto.periodo_carencia }} dias
+                    </td>
+
                 </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="5">
+                        Nenhum produto cadastrado.
+                    </td>
+                </tr>
+
                 {% endfor %}
+
             </tbody>
+
         </table>
 
-        <a href="/" class="botao">Voltar</a>
-    </main>
+    </div>
 
-</body>
-</html>
+</section>
+
+
+<!-- =====================================================
+     TALHÕES
+===================================================== -->
+
+<section>
+
+    <h2>🌾 Talhões</h2>
+
+    <div class="tabela-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Talhão</th>
+                    <th>Área</th>
+                    <th>Cultura</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for talhao in talhoes %}
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            {{ talhao.nome }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ talhao.area }} hectares
+                    </td>
+
+                    <td>
+                        {{ talhao.cultura }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="3">
+                        Nenhum talhão cadastrado.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     APLICAÇÕES
+===================================================== -->
+
+<section>
+
+    <h2>🚜 Aplicações</h2>
+
+    <div class="tabela-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Data</th>
+                    <th>Produto</th>
+                    <th>Princípio ativo</th>
+                    <th>Talhão</th>
+                    <th>Cultura</th>
+                    <th>Quantidade</th>
+                    <th>Liberação</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for aplicacao in aplicacoes %}
+
+                <tr>
+
+                    <td>
+                        {{ aplicacao.data_aplicacao }}
+                    </td>
+
+                    <td>
+                        {{ aplicacao.produto_nome }}
+                    </td>
+
+                    <td>
+                        {{ aplicacao.principio_ativo }}
+                    </td>
+
+                    <td>
+                        {{ aplicacao.talhao_nome }}
+                    </td>
+
+                    <td>
+                        {{ aplicacao.cultura }}
+                    </td>
+
+                    <td>
+                        {{ aplicacao.quantidade }}
+                        {{ aplicacao.unidade }}
+                    </td>
+
+                    <td>
+                        {{ aplicacao.data_liberacao }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="7">
+                        Nenhuma aplicação registrada.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MOVIMENTAÇÕES
+===================================================== -->
+
+<section>
+
+    <h2>🔄 Movimentações</h2>
+
+    <div class="tabela-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Data</th>
+                    <th>Produto</th>
+                    <th>Tipo</th>
+                    <th>Quantidade</th>
+                    <th>Observação</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for movimentacao in movimentacoes %}
+
+                <tr>
+
+                    <td>
+                        {{ movimentacao.data }}
+                    </td>
+
+                    <td>
+                        {{ movimentacao.produto_nome }}
+                    </td>
+
+                    <td>
+
+                        {% if movimentacao.tipo == "ENTRADA" %}
+
+                            <span class="entrada">
+                                Entrada
+                            </span>
+
+                        {% else %}
+
+                            <span class="saida">
+                                Saída
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {{ movimentacao.quantidade }}
+                        {{ movimentacao.unidade }}
+                    </td>
+
+                    <td>
+                        {{ movimentacao.observacao or "-" }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="5">
+                        Nenhuma movimentação registrada.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     BOTÕES
+===================================================== -->
+
+<section class="acoes">
+
+    <h2>Ações rápidas</h2>
+
+    <div class="botoes">
+
+        <a
+            class="botao"
+            href="{{ url_for('cadastrar_produto') }}"
+        >
+            + Produto
+        </a>
+
+        <a
+            class="botao"
+            href="{{ url_for('movimentacoes') }}"
+        >
+            + Movimentação
+        </a>
+
+        <a
+            class="botao"
+            href="{{ url_for('cadastrar_talhao') }}"
+        >
+            + Talhão
+        </a>
+
+        <a
+            class="botao"
+            href="{{ url_for('aplicacoes') }}"
+        >
+            + Aplicação
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

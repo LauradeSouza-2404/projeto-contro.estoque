@@ -520,6 +520,59 @@ def historico():
 # INICIALIZAÇÃO
 # ============================================================
 
+@app.route("/listagem")
+def listagem():
+    conexao = conectar_banco()
+
+    produtos = conexao.execute("""
+        SELECT *
+        FROM produtos
+        ORDER BY nome
+    """).fetchall()
+
+    talhoes = conexao.execute("""
+        SELECT *
+        FROM talhoes
+        ORDER BY nome
+    """).fetchall()
+
+    aplicacoes = conexao.execute("""
+        SELECT
+            aplicacoes.*,
+            produtos.nome AS produto_nome,
+            produtos.principio_ativo,
+            produtos.unidade,
+            talhoes.nome AS talhao_nome,
+            talhoes.cultura
+        FROM aplicacoes
+        JOIN produtos
+            ON produtos.id = aplicacoes.produto_id
+        JOIN talhoes
+            ON talhoes.id = aplicacoes.talhao_id
+        ORDER BY aplicacoes.data_aplicacao DESC
+    """).fetchall()
+
+    movimentacoes = conexao.execute("""
+        SELECT
+            movimentacoes.*,
+            produtos.nome AS produto_nome,
+            produtos.unidade
+        FROM movimentacoes
+        JOIN produtos
+            ON produtos.id = movimentacoes.produto_id
+        ORDER BY movimentacoes.id DESC
+    """).fetchall()
+
+    conexao.close()
+
+    return render_template(
+        "listagem.html",
+        produtos=produtos,
+        talhoes=talhoes,
+        aplicacoes=aplicacoes,
+        movimentacoes=movimentacoes
+    )
+
 if __name__ == "__main__":
     inicializar_banco()
     app.run(debug=True)
