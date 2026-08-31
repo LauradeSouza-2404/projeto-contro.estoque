@@ -1,0 +1,422 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7f2;
+    color: #263326;
+    min-height: 100vh;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    background: #24452d;
+    color: white;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 7%;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    width: 86%;
+    max-width: 1200px;
+
+    margin: 40px auto;
+
+    min-height: 70vh;
+}
+
+
+h1 {
+    margin-bottom: 10px;
+    color: #24452d;
+}
+
+
+h2 {
+    margin: 30px 0 15px;
+}
+
+
+p {
+    line-height: 1.6;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    background: #dfeadd;
+
+    padding: 45px;
+
+    border-radius: 15px;
+
+    margin-bottom: 35px;
+}
+
+
+.hero h1 {
+    font-size: 36px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 20px;
+}
+
+
+.card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+.card h3 {
+    margin: 10px 0;
+}
+
+
+.card strong {
+    font-size: 30px;
+    display: block;
+}
+
+
+.icone {
+    font-size: 30px;
+}
+
+
+/* =========================
+   BOTÕES
+========================= */
+
+.botoes {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+}
+
+
+.botao {
+    display: inline-block;
+
+    background: #2f6b3d;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 18px;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+
+.botao:hover {
+    background: #244f2e;
+}
+
+
+/* =========================
+   FORMULÁRIOS
+========================= */
+
+.formulario {
+    background: white;
+
+    max-width: 700px;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.08);
+
+    margin-top: 25px;
+}
+
+
+.formulario label {
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 18px;
+}
+
+
+input,
+select,
+textarea {
+    width: 100%;
+
+    padding: 11px;
+
+    margin-top: 7px;
+
+    border: 1px solid #cbd5c8;
+
+    border-radius: 6px;
+
+    font-size: 15px;
+}
+
+
+textarea {
+    resize: vertical;
+}
+
+
+.linha {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+
+/* =========================
+   TABELAS
+========================= */
+
+.tabela-container {
+    overflow-x: auto;
+
+    background: white;
+
+    border-radius: 10px;
+
+    margin-top: 20px;
+}
+
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+
+th,
+td {
+    padding: 14px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #e5e9e3;
+}
+
+
+th {
+    background: #e7eee4;
+}
+
+
+tr:hover {
+    background: #f7f9f6;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.entrada {
+    color: #27753b;
+
+    font-weight: bold;
+}
+
+
+.saida {
+    color: #9b3d3d;
+
+    font-weight: bold;
+}
+
+
+.estoque-baixo {
+    color: #b56b00;
+
+    font-weight: bold;
+}
+
+
+.carencia {
+    color: #b56b00;
+
+    font-weight: bold;
+}
+
+
+.liberado {
+    color: #27753b;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   ALERTAS
+========================= */
+
+.alerta {
+    padding: 14px;
+
+    border-radius: 7px;
+
+    margin-bottom: 20px;
+}
+
+
+.alerta.sucesso {
+    background: #dcefdc;
+
+    color: #285c2d;
+}
+
+
+.alerta.erro {
+    background: #f5dddd;
+
+    color: #8b2d2d;
+}
+
+
+/* =========================
+   CABEÇALHO DAS PÁGINAS
+========================= */
+
+.cabecalho-pagina {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background: #24452d;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 20px;
+
+    margin-top: 50px;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 800px) {
+
+    header {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    nav {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+
+    .cabecalho-pagina {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+
+    .linha {
+        grid-template-columns: 1fr;
+    }
+
+}
