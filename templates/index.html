@@ -3,43 +3,77 @@
 
 <head>
     <meta charset="UTF-8">
+
     <title>Controle de Estoque</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
     <header>
-        <h1>Controle de Estoque e Rastreabilidade</h1>
-        <p>🌱 Sistema de Controle Agrícola</p>
+        <h1>Controle de Estoque</h1>
+        <p>Sistema de controle e rastreabilidade agrícola</p>
     </header>
 
     <div class="container">
 
-        <div class="card">
+        <div class="menu">
 
-            <h2>Bem-vindo!</h2>
+            <div class="card">
+                <h2>🌱 Dados do Campo</h2>
 
-            <p>
-                Sistema para controle de estoque,
-                dados do campo e rastreabilidade de produtos agrícolas.
-            </p>
-
-            <div class="menu">
+                <p>
+                    Consulte os dados dos talhões,
+                    culturas e defensivos.
+                </p>
 
                 <a class="botao" href="/dados-campo">
-                    Dados do Campo
+                    Acessar
                 </a>
+            </div>
+
+
+            <div class="card">
+                <h2>📦 Estoque</h2>
+
+                <p>
+                    Consulte os produtos disponíveis
+                    no estoque.
+                </p>
 
                 <a class="botao" href="/estoque">
-                    Estoque
+                    Acessar
                 </a>
+            </div>
+
+
+            <div class="card">
+                <h2>🚜 Rastreabilidade</h2>
+
+                <p>
+                    Consulte o histórico dos produtos
+                    utilizados nos talhões.
+                </p>
 
                 <a class="botao" href="/rastreabilidade">
-                    Rastreabilidade
+                    Acessar
                 </a>
+            </div>
 
+
+            <div class="card">
+                <h2>📋 Histórico</h2>
+
+                <p>
+                    Consulte as movimentações
+                    de entrada e saída.
+                </p>
+
+                <a class="botao" href="/historico">
+                    Acessar
+                </a>
             </div>
 
         </div>
@@ -47,5 +81,4 @@
     </div>
 
 </body>
-
 </html>

@@ -1,4 +1,105 @@
-/* Tabela de dados do campo */
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f4;
+    color: #333;
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+header {
+    background-color: #2e7d32;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+header h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
+}
+
+header p {
+    margin: 0;
+    font-size: 16px;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 30px auto;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    margin-top: 0;
+    color: #2e7d32;
+}
+
+
+/* =========================
+   BOTÕES
+========================= */
+
+.botao {
+    display: inline-block;
+    padding: 10px 16px;
+    margin: 5px 3px;
+    background-color: #2e7d32;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.botao:hover {
+    background-color: #1b5e20;
+}
+
+
+/* =========================
+   ÁREA DE BOTÕES
+========================= */
+
+.voltar {
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   TABELAS
+========================= */
 
 .tabela-container {
     background-color: white;
@@ -29,8 +130,161 @@
     background-color: #f1f8f2;
 }
 
+
+/* =========================
+   STATUS
+========================= */
+
 .status {
+    display: inline-block;
     padding: 6px 10px;
     border-radius: 5px;
     font-weight: bold;
+}
+
+
+/* =========================
+   FORMULÁRIOS
+========================= */
+
+form {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+form p {
+    margin-bottom: 18px;
+}
+
+label {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 11px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #2e7d32;
+}
+
+
+/* =========================
+   TALHÕES / REGISTROS
+========================= */
+
+.talhao {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 18px;
+    border-left: 5px solid #2e7d32;
+    border-radius: 8px;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.08);
+}
+
+.talhao h2 {
+    margin-top: 0;
+    color: #2e7d32;
+}
+
+.talhao p {
+    margin: 8px 0;
+}
+
+
+/* =========================
+   ESTOQUE
+========================= */
+
+.produto {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border-left: 5px solid #2e7d32;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.08);
+}
+
+.produto h2 {
+    margin-top: 0;
+    color: #2e7d32;
+}
+
+.produto p {
+    margin: 7px 0;
+}
+
+
+/* =========================
+   HISTÓRICO
+========================= */
+
+.movimentacao {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.08);
+}
+
+.movimentacao h2 {
+    color: #2e7d32;
+    margin-top: 0;
+}
+
+
+/* =========================
+   PÁGINA INICIAL
+========================= */
+
+.menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.menu .card {
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.menu .card:hover {
+    transform: translateY(-3px);
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 700px) {
+
+    .container {
+        width: 95%;
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
+
+    .menu {
+        grid-template-columns: 1fr;
+    }
+
+    .botao {
+        display: block;
+        text-align: center;
+        margin: 8px 0;
+    }
 }

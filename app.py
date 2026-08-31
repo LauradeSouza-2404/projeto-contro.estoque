@@ -212,6 +212,71 @@ def rastreabilidade():
         "rastreabilidade.html",
         registros=registros
     )
+# =========================
+# EDITAR PRODUTO - UPDATE
+# =========================
+
+@app.route("/editar-produto/<nome>", methods=["GET", "POST"])
+def editar_produto(nome):
+
+    produto_encontrado = None
+
+    for produto in produtos:
+
+        if produto["nome"] == nome:
+
+            produto_encontrado = produto
+
+            break
+
+    if produto_encontrado is None:
+        return "Produto não encontrado"
+
+    if request.method == "POST":
+
+        produto_encontrado["nome"] = request.form["nome"]
+
+        produto_encontrado["categoria"] = request.form["categoria"]
+
+        produto_encontrado["quantidade"] = int(
+            request.form["quantidade"]
+        )
+
+        produto_encontrado["unidade"] = request.form["unidade"]
+
+        return redirect("/estoque")
+
+    return render_template(
+        "editar_produto.html",
+        produto=produto_encontrado
+    )
+
+
+# =========================
+# EXCLUIR PRODUTO - DELETE
+# =========================
+
+@app.route("/excluir-produto/<nome>", methods=["POST"])
+def excluir_produto(nome):
+
+    for produto in produtos:
+
+        if produto["nome"] == nome:
+
+            produtos.remove(produto)
+
+            break
+
+    return redirect("/estoque")
+
+
+# =========================
+# EXECUTAR A APLICAÇÃO
+# =========================
+
+if __name__ == "__main__":
+    app.run(debug=True)
+ 
 
 
 # Executar aplicação

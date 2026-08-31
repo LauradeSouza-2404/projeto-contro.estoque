@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Editar Produto</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Editar Produto</h1>
+        <p>Atualizar informações do produto</p>
+    </header>
+
+    <div class="container">
+
+        <form method="POST">
+
+            <p>
+                <label>Nome do produto:</label>
+
+                <input
+                    type="text"
+                    name="nome"
+                    value="{{ produto.nome }}"
+                    required
+                >
+            </p>
+
+            <p>
+                <label>Categoria:</label>
+
+                <input
+                    type="text"
+                    name="categoria"
+                    value="{{ produto.categoria }}"
+                    required
+                >
+            </p>
+
+            <p>
+                <label>Quantidade:</label>
+
+                <input
+                    type="number"
+                    name="quantidade"
+                    value="{{ produto.quantidade }}"
+                    min="0"
+                    required
+                >
+            </p>
+
+            <p>
+                <label>Unidade:</label>
+
+                <select name="unidade">
+
+                    <option value="L"
+                        {% if produto.unidade == "L" %}
+                        selected
+                        {% endif %}>
+                        Litros (L)
+                    </option>
+
+                    <option value="kg"
+                        {% if produto.unidade == "kg" %}
+                        selected
+                        {% endif %}>
+                        Quilogramas (kg)
+                    </option>
+
+                    <option value="un"
+                        {% if produto.unidade == "un" %}
+                        selected
+                        {% endif %}>
+                        Unidade
+                    </option>
+
+                </select>
+            </p>
+
+            <button class="botao" type="submit">
+                Salvar alterações
+            </button>
+
+            <a class="botao" href="/estoque">
+                Cancelar
+            </a>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

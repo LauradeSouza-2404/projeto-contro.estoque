@@ -13,7 +13,7 @@
 
     <header>
         <h1>Controle de Estoque</h1>
-        <p>Produtos disponíveis</p>
+        <p>Produtos disponíveis no estoque</p>
     </header>
 
     <div class="container">
@@ -41,9 +41,11 @@
             </a>
 
         </div>
+
+
         {% for produto in produtos %}
 
-        <div class="talhao">
+        <div class="produto">
 
             <h2>{{ produto.nome }}</h2>
 
@@ -54,13 +56,26 @@
 
             <p>
                 <strong>Quantidade:</strong>
-                {{ produto.quantidade }} {{ produto.unidade }}
+                {{ produto.quantidade }}
+                {{ produto.unidade }}
             </p>
 
             <p>
                 <strong>Status:</strong>
                 {{ produto.status }}
             </p>
+            <a class="botao" href="/editar-produto/{{ produto.nome }}">
+                ✏️ Editar
+            </a>
+
+            <form action="/excluir-produto/{{ produto.nome }}" method="POST" style="display: inline;"
+                onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">
+
+                <button class="botao" type="submit">
+                    🗑️ Excluir
+                </button>
+
+            </form>
 
         </div>
 
