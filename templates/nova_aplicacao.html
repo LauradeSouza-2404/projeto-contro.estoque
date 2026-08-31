@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Nova Aplicação - Cultiva+{% endblock %}
+
+{% block content %}
+
+<section class="pagina">
+
+    <h1>Nova aplicação</h1>
+
+    <p>
+        Registre uma aplicação de defensivo agrícola.
+    </p>
+
+
+    <form method="POST">
+
+        <div class="campo">
+
+            <label for="produto">
+                Defensivo
+            </label>
+
+            <input type="text" id="produto" name="produto" placeholder="Nome do defensivo" required>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="talhao">
+                Talhão
+            </label>
+
+            <input type="text" id="talhao" name="talhao" placeholder="Ex.: Talhão 01" required>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="data_aplicacao">
+                Data da aplicação
+            </label>
+
+            <input type="date" id="data_aplicacao" name="data_aplicacao" required>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="quantidade">
+                Quantidade
+            </label>
+
+            <input type="number" id="quantidade" name="quantidade" step="0.01" min="0" placeholder="Ex.: 2.5" required>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="unidade">
+                Unidade
+            </label>
+
+            <select id="unidade" name="unidade" required>
+
+                <option value="">
+                    Selecione
+                </option>
+
+                <option value="L">
+                    Litros
+                </option>
+
+                <option value="kg">
+                    Quilogramas
+                </option>
+
+                <option value="mL">
+                    Mililitros
+                </option>
+
+            </select>
+
+        </div>
+        <div class="campo">
+
+            <label for="periodo_carencia">
+                Período de carência (dias)
+            </label>
+
+            <input type="number" id="periodo_carencia" name="periodo_carencia" min="0" placeholder="Ex.: 14" required>
+
+            <small>
+                Informe a quantidade de dias que deve ser respeitada
+                antes da colheita.
+            </small>
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="observacao">
+                Observação
+            </label>
+
+            <textarea id="observacao" name="observacao" rows="4" placeholder="Informações adicionais"></textarea>
+
+        </div>
+
+
+        <button type="submit" class="botao">
+            Registrar aplicação
+        </button>
+
+    </form>
+
+</section>
+
+{% endblock %}

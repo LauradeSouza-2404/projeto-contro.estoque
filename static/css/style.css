@@ -88,13 +88,17 @@ table {
 
 th,
 td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
+    padding: 14px 16px;
     text-align: left;
+    white-space: nowrap;
 }
 
 th {
-    background: #eef3ec;
+    font-weight: 700;
+}
+
+td {
+    border-bottom: 1px solid #ddd;
 }
 
 form {
@@ -122,4 +126,90 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 15px;
+}
+
+.btn-editar {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #3f8150;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.btn-editar:hover {
+    background-color: #326a40;
+    color: white;
+}
+
+.acoes-formulario {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.btn-salvar {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3f8150;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-salvar:hover {
+    background-color: #326a40;
+}
+
+.btn-cancelar {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e6e6e6;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.btn-cancelar:hover {
+    background-color: #d2d2d2;
+    color: #222;
+}
+.acoes-tabela {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.acoes-tabela form {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.btn-excluir {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #c94a4a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-excluir:hover {
+    background-color: #a83a3a;
 }

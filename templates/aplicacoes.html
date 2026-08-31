@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Aplicações - Cultiva+{% endblock %}
+
+{% block content %}
+
+<section class="pagina">
+
+    <div class="cabecalho-pagina">
+        <tr>
+
+            <th>Defensivo</th>
+            <th>Talhão</th>
+            <th>Data</th>
+            <th>Quantidade</th>
+            <th>Unidade</th>
+            <th>Carência</th>
+            <th>Liberação</th>
+            <th>Observação</th>
+            <th>Ações</th>
+        </tr>
+        <div>
+            <h1>Aplicações</h1>
+
+            <p>
+                Histórico de aplicações de defensivos agrícolas.
+            </p>
+        </div>
+
+        <a href="{{ url_for('nova_aplicacao') }}" class="botao">
+            + Nova aplicação
+        </a>
+
+    </div>
+
+    <div class="tabela-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Defensivo</th>
+                    <th>Talhão</th>
+                    <th>Data</th>
+                    <th>Quantidade</th>
+                    <th>Unidade</th>
+                    <th>Carência</th>
+                    <th>Data da carência</th>
+                    <th>Observação</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for aplicacao in aplicacoes %}
+                <tr>
+                    <td>{{ aplicacao["produto"] }}</td>
+
+                    <td>{{ aplicacao["talhao"] }}</td>
+
+                    <td>{{ aplicacao["data_aplicacao"] }}</td>
+
+                    <td>{{ aplicacao["quantidade"] }}</td>
+
+                    <td>{{ aplicacao["unidade"] }}</td>
+
+                    <td>
+                        {{ aplicacao["periodo_carencia"] }} dias
+                    </td>
+
+                    <td>
+                        {{ aplicacao["data_liberacao"] or "-" }}
+                    </td>
+
+                    <td>
+                        {{ aplicacao["observacao"] or "-" }}
+                    </td>
+                    <td>
+                        <div class="acoes-tabela">
+
+                            <a href="{{ url_for('editar_aplicacao', id=aplicacao['id']) }}" class="btn-editar">
+                                Editar
+                            </a>
+
+                            <form action="{{ url_for('excluir_aplicacao', id=aplicacao['id']) }}" method="POST"
+                                onsubmit="return confirm('Tem certeza que deseja excluir esta aplicação?');">
+                                <button type="submit" class="btn-excluir">
+                                    Excluir
+                                </button>
+                            </form>
+
+                        </div>
+                    </td>
+                </tr>
+
+                {% else %}
+                <tr>
+                    <td colspan="9">
+                        Nenhuma aplicação registrada.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

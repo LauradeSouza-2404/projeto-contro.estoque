@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Editar aplicação</h1>
+
+    <form method="POST">
+
+        <label for="produto">
+            Defensivo
+        </label>
+
+        <input type="text" id="produto" name="produto" value="{{ aplicacao['produto'] }}" required>
+
+
+        <label for="talhao">
+            Talhão
+        </label>
+
+        <input type="text" id="talhao" name="talhao" value="{{ aplicacao['talhao'] }}" required>
+
+
+        <label for="data_aplicacao">
+            Data da aplicação
+        </label>
+
+        <input type="date" id="data_aplicacao" name="data_aplicacao" value="{{ aplicacao['data_aplicacao'] }}" required>
+
+
+        <label for="quantidade">
+            Quantidade
+        </label>
+
+        <input type="number" step="0.01" id="quantidade" name="quantidade" value="{{ aplicacao['quantidade'] }}"
+            required>
+
+
+        <label for="unidade">
+            Unidade
+        </label>
+
+        <select id="unidade" name="unidade" required>
+
+            <option value="L" {% if aplicacao['unidade']=='L' %}selected{% endif %}>
+                Litros (L)
+            </option>
+
+            <option value="kg" {% if aplicacao['unidade']=='kg' %}selected{% endif %}>
+                Quilogramas (kg)
+            </option>
+
+        </select>
+
+
+        <label for="periodo_carencia">
+            Período de carência (dias)
+        </label>
+
+        <input type="number" min="0" id="periodo_carencia" name="periodo_carencia"
+            value="{{ aplicacao['periodo_carencia'] }}" required>
+
+
+        <label for="observacao">
+            Observação
+        </label>
+
+        <textarea id="observacao" name="observacao">{{ aplicacao['observacao'] or '' }}</textarea>
+
+
+        <div class="acoes-formulario">
+
+            <button type="submit" class="btn-salvar">
+                Salvar alterações
+            </button>
+
+            <a href="{{ url_for('aplicacoes') }}" class="btn-cancelar">
+                Cancelar
+            </a>
+
+        </div>
+
+        {% endblock %}

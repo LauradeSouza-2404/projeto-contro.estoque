@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Início - Cultiva+{% endblock %}
+
+{% block content %}
+
+<section class="inicio">
+
+    <h1>Bem-vindo ao Cultiva+</h1>
+
+    <p>
+        Sistema de controle de defensivos agrícolas,
+        aplicações e rastreabilidade ambiental.
+    </p>
+
+    <a href="{{ url_for('aplicacoes') }}" class="botao">
+        Ver aplicações
+    </a>
+
+</section>
+
+{% endblock %}
