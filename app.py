@@ -187,7 +187,113 @@ def cadastrar_produto():
 
     return render_template("cadastro_produto.html")
 
+@app.route("/produto/editar/<int:produto_id>", methods=["GET", "POST"])
+def editar_produto(produto_id):
 
+    conexao = conectar_banco()
+
+    produto = conexao.execute("""
+        SELECT *
+        FROM produtos
+        WHERE id = ?
+    """, (produto_id,)).fetchone()
+
+    if not produto:
+        conexao.close()
+        flash("Produto não encontrado.", "erro")
+        return redirect(url_for("estoque"))
+
+    if request.method == "POST":
+
+        nome = request.form["nome"]
+        principio_ativo = request.form["principio_ativo"]
+        fabricante = request.form["fabricante"]
+        unidade = request.form["unidade"]
+        periodo_carencia = int(request.form["periodo_carencia"])
+
+        conexao.execute("""
+            UPDATE produtos
+            SET nome = ?,
+                principio_ativo = ?,
+                fabricante = ?,
+                unidade = ?,
+                periodo_carencia = ?
+            WHERE id = ?
+        """, (
+            nome,
+            principio_ativo,
+            fabricante,
+            unidade,
+            periodo_carencia,
+            produto_id
+        ))
+
+        conexao.commit()
+        conexao.close()
+
+        flash("Produto atualizado com sucesso!", "sucesso")
+
+        return redirect(url_for("estoque"))
+
+    conexao.close()
+
+    return render_template(
+        "editar_produto.html",
+        produto=produto
+    )
+
+@app.route("/produto/excluir/<int:produto_id>", methods=["POST"])
+def excluir_produto(produto_id):
+
+    conexao = conectar_banco()
+
+    produto = conexao.execute("""
+        SELECT *
+        FROM produtos
+        WHERE id = ?
+    """, (produto_id,)).fetchone()
+
+    if not produto:
+        conexao.close()
+        flash("Produto não encontrado.", "erro")
+        return redirect(url_for("estoque"))
+
+    possui_movimentacoes = conexao.execute("""
+        SELECT 1
+        FROM movimentacoes
+        WHERE produto_id = ?
+        LIMIT 1
+    """, (produto_id,)).fetchone()
+
+    possui_aplicacoes = conexao.execute("""
+        SELECT 1
+        FROM aplicacoes
+        WHERE produto_id = ?
+        LIMIT 1
+    """, (produto_id,)).fetchone()
+
+    if possui_movimentacoes or possui_aplicacoes:
+
+        conexao.close()
+
+        flash(
+            "Não é possível excluir este produto porque ele possui histórico de movimentações ou aplicações.",
+            "erro"
+        )
+
+        return redirect(url_for("estoque"))
+
+    conexao.execute("""
+        DELETE FROM produtos
+        WHERE id = ?
+    """, (produto_id,))
+
+    conexao.commit()
+    conexao.close()
+
+    flash("Produto excluído com sucesso!", "sucesso")
+
+    return redirect(url_for("estoque"))
 # ============================================================
 # MOVIMENTAÇÕES
 # ============================================================

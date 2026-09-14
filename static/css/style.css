@@ -185,7 +185,9 @@ p {
     background: #244f2e;
 }
 
-
+.formulario .botao {
+    margin-top: 10px;
+}
 /* =========================
    FORMULÁRIOS
 ========================= */
