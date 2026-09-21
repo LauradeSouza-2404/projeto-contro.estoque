@@ -9,99 +9,108 @@ Cultiva+ | Estoque
 <div class="cabecalho-pagina">
 
     <div>
-
         <h1>📦 Estoque de Defensivos</h1>
 
         <p>
             Consulte os produtos disponíveis na propriedade.
         </p>
-
     </div>
 
-    <a class="botao"
-       href="{{ url_for('cadastrar_produto') }}">
+    <a class="botao" href="{{ url_for('cadastrar_produto') }}">
         + Novo produto
     </a>
 
 </div>
 
-
 <div class="tabela-container">
 
-<table>
+    <table>
 
-    <thead>
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Princípio ativo</th>
+                <th>Fabricante</th>
+                <th>Quantidade</th>
+                <th>Carência</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
 
-        <tr>
+        <tbody>
 
-            <th>Produto</th>
-            <th>Princípio ativo</th>
-            <th>Fabricante</th>
-            <th>Quantidade</th>
-            <th>Carência</th>
+            {% for produto in produtos %}
 
-        </tr>
+            <tr>
 
-    </thead>
+                <td>
+                    <strong>{{ produto.nome }}</strong>
+                </td>
 
+                <td>
+                    {{ produto.principio_ativo }}
+                </td>
 
-    <tbody>
+                <td>
+                    {{ produto.fabricante or "-" }}
+                </td>
 
-        {% for produto in produtos %}
+                <td>
 
-        <tr>
+                    {% if produto.quantidade <= 10 %}
 
-            <td>
-                <strong>{{ produto.nome }}</strong>
-            </td>
+                        <span class="estoque-baixo">
+                            {{ produto.quantidade }}
+                            {{ produto.unidade }}
+                        </span>
 
-            <td>
-                {{ produto.principio_ativo }}
-            </td>
+                    {% else %}
 
-            <td>
-                {{ produto.fabricante or "-" }}
-            </td>
-
-            <td>
-
-                {% if produto.quantidade <= 10 %}
-
-                    <span class="estoque-baixo">
                         {{ produto.quantidade }}
                         {{ produto.unidade }}
-                    </span>
 
-                {% else %}
+                    {% endif %}
 
-                    {{ produto.quantidade }}
-                    {{ produto.unidade }}
+                </td>
 
-                {% endif %}
+                <td>
+                    {{ produto.periodo_carencia }} dias
+                </td>
 
-            </td>
+                <td>
 
-            <td>
-                {{ produto.periodo_carencia }} dias
-            </td>
+                    <a href="{{ url_for('editar_produto', produto_id=produto.id) }}"
+                       class="botao botao-editar">
+                        Editar
+                    </a>
 
-        </tr>
+                    <form method="POST"
+                          action="{{ url_for('excluir_produto', produto_id=produto.id) }}"
+                          onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">
 
-        {% else %}
+                        <button type="submit" class="botao botao-excluir">
+                            Excluir
+                        </button>
 
-        <tr>
+                    </form>
 
-            <td colspan="5">
-                Nenhum produto cadastrado.
-            </td>
+                </td>
 
-        </tr>
+            </tr>
 
-        {% endfor %}
+            {% else %}
 
-    </tbody>
+            <tr>
+                <td colspan="6">
+                    Nenhum produto cadastrado.
+                </td>
+            </tr>
 
-</table>
+            {% endfor %}
+
+        </tbody>
+
+    </table>
 
 </div>
 

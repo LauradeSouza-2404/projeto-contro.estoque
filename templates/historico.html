@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Histórico{% endblock %}
+
+{% block content %}
+
+<div class="cabecalho-pagina">
+
+
+<h1>Histórico de Aplicações</h1>
+
+
+</div>
+
+<div class="tabela-container">
+
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Princípio ativo</th>
+            <th>Talhão</th>
+            <th>Cultura</th>
+            <th>Quantidade</th>
+            <th>Data da aplicação</th>
+            <th>Data de liberação</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for registro in registros %}
+
+        <tr>
+
+            <td>{{ registro.produto_nome }}</td>
+
+            <td>{{ registro.principio_ativo }}</td>
+
+            <td>{{ registro.talhao_nome }}</td>
+
+            <td>{{ registro.cultura }}</td>
+
+            <td>{{ registro.quantidade }} {{ registro.unidade }}</td>
+
+            <td>{{ registro.data_aplicacao }}</td>
+
+            <td>{{ registro.data_liberacao }}</td>
+
+            <td>
+
+                {% if registro.data_liberacao > hoje %}
+
+                    <span class="carencia">
+                        Em carência
+                    </span>
+
+                {% else %}
+
+                    <span class="liberado">
+                        Liberado
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% else %}
+
+        <tr>
+            <td colspan="8">
+                Nenhuma aplicação registrada.
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+
+</div>
+
+{% endblock %}
