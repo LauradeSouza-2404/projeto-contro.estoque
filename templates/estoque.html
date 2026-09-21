@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cultiva+ | Estoque
+{% endblock %}
+
+{% block content %}
+
+<div class="cabecalho-pagina">
+
+    <div>
+
+        <h1>📦 Estoque de Defensivos</h1>
+
+        <p>
+            Consulte os produtos disponíveis na propriedade.
+        </p>
+
+    </div>
+
+    <a class="botao" href="{{ url_for('cadastrar_produto') }}">
+        + Novo produto
+    </a>
+
+</div>
+
+
+<div class="tabela-container">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Produto</th>
+                <th>Princípio ativo</th>
+                <th>Fabricante</th>
+                <th>Quantidade</th>
+                <th>Carência</th>
+                <th>Ações</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            {% for produto in produtos %}
+
+            <tr>
+
+                <td>
+                    <strong>{{ produto.nome }}</strong>
+                </td>
+
+                <td>
+                    {{ produto.principio_ativo }}
+                </td>
+
+                <td>
+                    {{ produto.fabricante or "-" }}
+                </td>
+
+                <td>
+
+                    {% if produto.quantidade <= 10 %} <span class="estoque-baixo">
+                        {{ produto.quantidade }}
+                        {{ produto.unidade }}
+                        </span>
+
+                        {% else %}
+
+                        {{ produto.quantidade }}
+                        {{ produto.unidade }}
+
+                        {% endif %}
+
+                </td>
+
+                <td>
+                    {{ produto.periodo_carencia }} dias
+                </td>
+                <td>
+
+                    <a href="{{ url_for('editar_produto', produto_id=produto.id) }}" class="botao botao-editar">
+                        Editar
+                    </a>
+
+                    <form method="POST" action="{{ url_for('excluir_produto', produto_id=produto.id) }}"
+                        onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">
+
+                        <button type="submit" class="botao botao-excluir">
+                            Excluir
+                        </button>
+
+                    </form>
+
+                </td>
+
+
+            </tr>
+
+            {% else %}
+
+            <tr>
+
+                <td colspan="6">
+                    Nenhum produto cadastrado.
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

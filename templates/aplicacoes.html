@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}Cultiva+ | Aplicações{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Registrar aplicação</h1>
+
+        <p>
+            Registre a aplicação de defensivos agrícolas nos talhões.
+        </p>
+    </div>
+
+</div>
+
+
+<div class="form-card">
+
+    <form method="POST">
+
+        <label for="produto_id">
+            Produto
+        </label>
+
+        <select
+            name="produto_id"
+            id="produto_id"
+            required
+        >
+
+            <option value="">
+                Selecione um produto
+            </option>
+
+            {% for produto in produtos %}
+
+                <option value="{{ produto.id }}">
+
+                    {{ produto.nome }}
+                    -
+                    {{ produto.quantidade }}
+                    {{ produto.unidade }}
+
+                </option>
+
+            {% endfor %}
+
+        </select>
+
+
+        <label for="talhao_id">
+            Talhão
+        </label>
+
+        <select
+            name="talhao_id"
+            id="talhao_id"
+            required
+        >
+
+            <option value="">
+                Selecione um talhão
+            </option>
+
+            {% for talhao in talhoes %}
+
+                <option value="{{ talhao.id }}">
+
+                    {{ talhao.nome }}
+                    -
+                    {{ talhao.cultura }}
+
+                </option>
+
+            {% endfor %}
+
+        </select>
+
+
+        <label for="quantidade">
+            Quantidade utilizada
+        </label>
+
+        <input
+            type="number"
+            name="quantidade"
+            id="quantidade"
+            step="0.01"
+            min="0.01"
+            required
+        >
+
+
+        <label for="data_aplicacao">
+            Data da aplicação
+        </label>
+
+        <input
+            type="date"
+            name="data_aplicacao"
+            id="data_aplicacao"
+            required
+        >
+
+
+        <label for="observacao">
+            Observação
+        </label>
+
+        <textarea
+            name="observacao"
+            id="observacao"
+            rows="4"
+            placeholder="Digite uma observação, se necessário..."
+        ></textarea>
+
+
+        <button
+            type="submit"
+            class="botao"
+        >
+            Registrar aplicação
+        </button>
+
+    </form>
+
+</div>
+
+
+<h2>Aplicações registradas</h2>
+
+
+<div class="table-container">
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Produto</th>
+                <th>Talhão</th>
+                <th>Cultura</th>
+                <th>Quantidade</th>
+                <th>Data da aplicação</th>
+                <th>Data de liberação</th>
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            {% for aplicacao in aplicacoes %}
+
+            <tr>
+
+                <td>
+                    {{ aplicacao.produto_nome }}
+                </td>
+
+                <td>
+                    {{ aplicacao.talhao_nome }}
+                </td>
+
+                <td>
+                    {{ aplicacao.cultura }}
+                </td>
+
+                <td>
+                    {{ aplicacao.quantidade }}
+                    {{ aplicacao.unidade }}
+                </td>
+
+                <td>
+                    {{ aplicacao.data_aplicacao }}
+                </td>
+
+                <td>
+                    {{ aplicacao.data_liberacao }}
+                </td>
+
+            </tr>
+
+            {% else %}
+
+            <tr>
+
+                <td colspan="6" class="empty">
+                    Nenhuma aplicação registrada.
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
