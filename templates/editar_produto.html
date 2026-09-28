@@ -40,6 +40,16 @@ Cultiva+ | Editar Produto
             value="{{ produto['fabricante'] or '' }}"
         >
 
+        <label>Quantidade:</label>
+         <input 
+            type="number" 
+            step="0.01" 
+            name="quantidade"
+            value="{{ produto['quantidade'] }}" 
+            required
+        >
+
+
         <label for="unidade">Unidade</label>
 
         <select
@@ -94,10 +104,14 @@ Cultiva+ | Editar Produto
                 Salvar alterações
             </button>
 
+            
+
         </div>
 
     </form>
 
+    <a href="{{ url_for('estoque') }}">Cancelar</a>
+    
 </div>
 
 {% endblock %}

@@ -60,13 +60,13 @@ Cultiva+ | Estoque
                     {% if produto.quantidade <= 10 %}
 
                         <span class="estoque-baixo">
-                            {{ produto.quantidade }}
+                            {{ produto['quantidade'] }}
                             {{ produto.unidade }}
                         </span>
 
                     {% else %}
 
-                        {{ produto.quantidade }}
+                        {{ produto['quantidade'] }}
                         {{ produto.unidade }}
 
                     {% endif %}
