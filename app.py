@@ -1,16 +1,27 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 import sqlite3
 from datetime import datetime, timedelta
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.secret_key = "cultiva-chave-secreta"
 
 DATABASE = "banco.db"
 
-
 # ============================================================
 # BANCO DE DADOS
 # ============================================================
+
+@app.before_request
+def proteger_paginas():
+    paginas_publicas = ["login", "cadastro", "static"]
+
+    if request.endpoint not in paginas_publicas:
+        if "usuario_id" not in session:
+            return redirect(url_for("login"))
+
+def usuario_logado():
+    return "usuario_id" in session
 
 def conectar_banco():
     conexao = sqlite3.connect(DATABASE)
@@ -21,6 +32,16 @@ def conectar_banco():
 def inicializar_banco():
     conexao = conectar_banco()
     cursor = conexao.cursor()
+
+    #Tabela de Login
+    conexao.execute("""
+    CREATE TABLE IF NOT EXISTS usuarios (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
+        email TEXT NOT NULL UNIQUE,
+        senha TEXT NOT NULL
+        )
+    """)
 
     # Tabela de produtos
     cursor.execute("""
@@ -83,6 +104,8 @@ def inicializar_banco():
 
 @app.route("/")
 def index():
+
+
     conexao = conectar_banco()
     cursor = conexao.cursor()
 
@@ -129,6 +152,7 @@ def index():
 
 @app.route("/estoque")
 def estoque():
+
     conexao = conectar_banco()
 
     produtos = conexao.execute("""
@@ -140,7 +164,6 @@ def estoque():
     conexao.close()
 
     return render_template("estoque.html", produtos=produtos)
-
 
 @app.route("/produto/cadastrar", methods=["GET", "POST"])
 def cadastrar_produto():
@@ -308,7 +331,6 @@ def talhoes():
         "talhoes.html",
         talhoes=talhoes_lista
     )
-
 
 @app.route("/talhao/cadastrar", methods=["GET", "POST"])
 def cadastrar_talhao():
@@ -522,6 +544,7 @@ def historico():
 
 @app.route("/listagem")
 def listagem():
+
     conexao = conectar_banco()
 
     produtos = conexao.execute("""
@@ -630,7 +653,6 @@ def editar_produto(produto_id):
         produto=produto
     )
 
-
 @app.route("/produto/excluir/<int:produto_id>", methods=["POST"])
 def excluir_produto(produto_id):
 
@@ -658,6 +680,70 @@ def excluir_produto(produto_id):
     flash("Produto excluído com sucesso!", "sucesso")
 
     return redirect(url_for("estoque"))
+
+
+
+@app.route("/cadastro", methods=["GET", "POST"])
+def cadastro():
+    if request.method == "POST":
+        nome = request.form["nome"]
+        email = request.form["email"]
+        senha = request.form["senha"]
+
+        senha_hash = generate_password_hash(senha)
+
+        conexao = conectar_banco()
+
+        try:
+            conexao.execute("""
+                INSERT INTO usuarios (nome, email, senha)
+                VALUES (?, ?, ?)
+            """, (nome, email, senha_hash))
+
+            conexao.commit()
+            flash("Cadastro realizado com sucesso!", "sucesso")
+            return redirect(url_for("login"))
+
+        except sqlite3.IntegrityError:
+            flash("Este e-mail já está cadastrado.", "erro")
+
+        finally:
+            conexao.close()
+
+    return render_template("cadastro.html")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        email = request.form["email"]
+        senha = request.form["senha"]
+
+        conexao = conectar_banco()
+
+        usuario = conexao.execute("""
+            SELECT *
+            FROM usuarios
+            WHERE email = ?
+        """, (email,)).fetchone()
+
+        conexao.close()
+
+        if usuario and check_password_hash(usuario["senha"], senha):
+            session["usuario_id"] = usuario["id"]
+            session["usuario_nome"] = usuario["nome"]
+
+            flash("Login realizado com sucesso!", "sucesso")
+            return redirect(url_for("index"))
+
+        flash("E-mail ou senha incorretos.", "erro")
+
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    flash("Você saiu da sua conta.", "sucesso")
+    return redirect(url_for("login"))
 
 if __name__ == "__main__":
     inicializar_banco()

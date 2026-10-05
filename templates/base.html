@@ -21,6 +21,7 @@
             🌱 Cultiva+
         </div>
 
+
         <nav>
 
             <a href="{{ url_for('index') }}">
@@ -51,6 +52,18 @@
                 Histórico
             </a>
 
+            <div class="usuario-menu">
+                {% if session.get('usuario_id') %}
+                <span class="usuario-nome">
+                    Olá, {{ session.get('usuario_nome') }}
+                </span>
+
+                <a href="{{ url_for('logout') }}" class="botao-sair">
+                    Sair
+                </a>
+                {% endif %}
+            </div>
+
         </nav>
 
     </header>
@@ -78,6 +91,7 @@
         {% block content %}
 
         {% endblock %}
+
 
     </main>
 
