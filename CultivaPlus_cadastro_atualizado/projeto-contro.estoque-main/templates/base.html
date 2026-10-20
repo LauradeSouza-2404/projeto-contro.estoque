@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#174c38">
+    <title>{% block title %}Cultiva+{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header class="site-header">
+    <a class="logo" href="{{ url_for('index') }}"><span class="logo-mark">🌱</span><span>Cultiva<span class="logo-plus">+</span><small>GESTÃO AGRÍCOLA</small></span></a>
+    <nav class="main-nav" aria-label="Navegação principal">
+        <a href="{{ url_for('index') }}">Início</a>
+        <a href="{{ url_for('estoque') }}">Estoque</a>
+        <a href="{{ url_for('movimentacoes') }}">Movimentações</a>
+        <a href="{{ url_for('talhoes') }}">Talhões</a>
+        <a href="{{ url_for('aplicacoes') }}">Aplicações</a>
+        <a href="{{ url_for('listagem') }}">Listagem</a>
+        <a href="{{ url_for('historico') }}">Histórico</a>
+    </nav>
+    {% if session.get('usuario_id') %}
+    <div class="user-area">
+        <span class="user-greeting">Olá, {{ session.get('usuario_nome') }}</span>
+        <a href="{{ url_for('logout') }}" class="logout-link">Sair ↗</a>
+    </div>
+    {% endif %}
+</header>
+<main class="page-main">
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+            <div class="flash-stack">
+            {% for categoria, mensagem in mensagens %}
+                <div class="alerta {{ categoria }}" role="status">{{ mensagem }}</div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</main>
+<footer class="site-footer"><span class="footer-leaf">✳</span> Cultiva+ <span>·</span> Controle e rastreabilidade agrícola</footer>
+</body>
+</html>

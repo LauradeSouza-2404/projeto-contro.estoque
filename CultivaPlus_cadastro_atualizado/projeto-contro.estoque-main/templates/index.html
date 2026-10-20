@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Cultiva+ | Início{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <span class="eyebrow">GESTÃO AGRÍCOLA INTELIGENTE</span>
+        <h1>Bem-vindo ao Cultiva+</h1>
+        <p>Gerencie seu estoque, acompanhe aplicações e mantenha a rastreabilidade dos defensivos agrícolas em um só lugar.</p>
+    </div>
+    <div class="hero-decoration" aria-hidden="true">🌿</div>
+</section>
+
+<div class="section-heading">
+    <div>
+        <span class="eyebrow">RESUMO DA PROPRIEDADE</span>
+        <h2>Visão geral</h2>
+    </div>
+    <p>Informações atualizadas do seu controle agrícola</p>
+</div>
+
+<section class="cards" aria-label="Resumo do sistema">
+    <article class="card">
+        <div class="card-top"><span class="icone">📦</span><span class="card-label">INVENTÁRIO</span></div>
+        <h3>Produtos cadastrados</h3>
+        <strong>{{ total_produtos }}</strong>
+        <p>Produtos no sistema</p>
+    </article>
+    <article class="card card-warning">
+        <div class="card-top"><span class="icone">⚠️</span><span class="card-label">ATENÇÃO</span></div>
+        <h3>Estoque baixo</h3>
+        <strong>{{ estoque_baixo }}</strong>
+        <p>Produtos com 10 ou menos unidades</p>
+    </article>
+    <article class="card card-blue">
+        <div class="card-top"><span class="icone">🌾</span><span class="card-label">PROPRIEDADE</span></div>
+        <h3>Talhões cadastrados</h3>
+        <strong>{{ total_talhoes }}</strong>
+        <p>Áreas de cultivo registradas</p>
+    </article>
+    <article class="card card-purple">
+        <div class="card-top"><span class="icone">⏳</span><span class="card-label">SEGURANÇA</span></div>
+        <h3>Em período de carência</h3>
+        <strong>{{ em_carencia }}</strong>
+        <p>Aplicações que ainda exigem atenção</p>
+    </article>
+</section>
+
+<section class="acoes">
+    <div class="section-heading">
+        <div><span class="eyebrow">ATALHOS</span><h2>Acesso rápido</h2></div>
+        <p>O que você deseja fazer hoje?</p>
+    </div>
+    <div class="quick-actions">
+        <a class="quick-action" href="{{ url_for('cadastrar_produto') }}"><span class="quick-icon">＋</span><span><strong>Cadastrar produto</strong><small>Adicionar ao estoque</small></span><span class="arrow">→</span></a>
+        <a class="quick-action" href="{{ url_for('movimentacoes') }}"><span class="quick-icon">↔</span><span><strong>Movimentação</strong><small>Registrar entrada ou saída</small></span><span class="arrow">→</span></a>
+        <a class="quick-action" href="{{ url_for('cadastrar_talhao') }}"><span class="quick-icon">🌱</span><span><strong>Cadastrar talhão</strong><small>Adicionar área de cultivo</small></span><span class="arrow">→</span></a>
+        <a class="quick-action" href="{{ url_for('aplicacoes') }}"><span class="quick-icon">✓</span><span><strong>Registrar aplicação</strong><small>Manter o histórico em dia</small></span><span class="arrow">→</span></a>
+    </div>
+</section>
+{% endblock %}

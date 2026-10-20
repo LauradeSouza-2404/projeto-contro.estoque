@@ -1,0 +1,79 @@
+@startuml
+
+title Fluxograma - Controle de Insumos e Rastreabilidade
+
+start
+
+:Produtor acessa o sistema;
+
+:Selecionar lote;
+
+if (Lote cadastrado?) then (Sim)
+
+    :Selecionar insumo;
+
+    if (Insumo cadastrado?) then (Sim)
+
+        :Informar quantidade do insumo;
+
+        :Informar data da aplicação;
+
+        :Informar área aplicada;
+
+        :Verificar quantidade disponível no estoque;
+
+        if (Estoque suficiente?) then (Sim)
+
+            :Registrar aplicação;
+
+            note right
+              Tabela APLICACAO
+            end note
+
+            :Atualizar quantidade do estoque;
+
+            note right
+              Tabela INSUMO
+            end note
+
+            :Registrar movimentação do estoque;
+
+            note right
+              Tabela MOVIMENTACAO_ESTOQUE
+            end note
+
+            :Associar aplicação ao lote;
+
+            note right
+              Tabela LOTE
+            end note
+
+            :Atualizar rastreabilidade;
+
+            :Exibir confirmação;
+
+        else (Não)
+
+            :Informar estoque insuficiente;
+
+        endif
+
+    else (Não)
+
+        :Cadastrar novo insumo;
+
+        :Voltar para seleção do insumo;
+
+    endif
+
+else (Não)
+
+    :Cadastrar novo lote;
+
+    :Voltar para seleção do lote;
+
+endif
+
+stop
+
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+
+title Fluxograma - Controle de Estoque e Rastreabilidade de Defensivos
+
+start
+
+:Produtor acessa o sistema;
+
+:Seleciona o defensivo para aplicação;
+
+:Sistema consulta estoque disponível;
+
+if (Quantidade disponível?) then (Sim)
+
+:Informar talhão/área de aplicação;
+
+:Informar quantidade utilizada;
+
+:Registrar data da aplicação;
+
+:Sistema atualiza estoque;
+
+:Sistema calcula período de carência;
+
+:Salvar histórico de rastreabilidade;
+
+:Gerar relatório da aplicação;
+
+else (Não)
+
+:Exibir mensagem de estoque insuficiente;
+
+endif
+
+stop
+
+@enduml

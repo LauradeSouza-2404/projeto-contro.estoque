@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#174c38">
+    <title>Entrar | Cultiva+</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="auth-body">
+<div class="auth-layout">
+    <aside class="auth-visual">
+        <a class="auth-brand" href="{{ url_for('login') }}"><span class="auth-brand-icon">🌱</span> Cultiva<span>+</span></a>
+        <div class="auth-message">
+            <span class="eyebrow">CUIDANDO DO QUE CULTIVAMOS</span>
+            <h1>Uma gestão mais simples para uma agricultura mais consciente.</h1>
+            <p>Estoque, aplicações e rastreabilidade organizados em um só lugar.</p>
+        </div>
+        <div class="auth-illustration" aria-hidden="true"><span>🌾</span><span>🌿</span><span>🌱</span></div>
+        <p class="auth-caption">Organização para crescer com responsabilidade.</p>
+    </aside>
+    <main class="auth-main">
+        <section class="auth-card">
+            <div class="auth-heading">
+                <span class="auth-mobile-logo">🌱 Cultiva+</span>
+                <span class="eyebrow">BEM-VINDO DE VOLTA</span>
+                <h2>Entre na sua conta</h2>
+                <p>Acesse seu painel de gestão agrícola.</p>
+            </div>
+            {% with mensagens = get_flashed_messages(with_categories=true) %}
+                {% if mensagens %}
+                    {% for categoria, mensagem in mensagens %}
+                        <div class="auth-alert {{ categoria }}">{{ mensagem }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form method="POST" class="auth-form">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="voce@exemplo.com" autocomplete="email" required>
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="current-password" required>
+                <button type="submit" class="auth-submit">Entrar na plataforma <span>→</span></button>
+            </form>
+            <p class="auth-register">Ainda não tem uma conta? <a href="{{ url_for('cadastro') }}">Criar cadastro</a></p>
+            <p class="auth-legal">Ao entrar, você acessa as informações da sua propriedade.</p>
+        </section>
+    </main>
+</div>
+</body>
+</html>

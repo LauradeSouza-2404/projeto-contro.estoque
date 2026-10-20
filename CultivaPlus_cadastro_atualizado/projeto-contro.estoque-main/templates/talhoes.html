@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Talhões{% endblock %}
+
+{% block content %}
+
+<div class="cabecalho-pagina">
+
+<h1>Talhões</h1>
+
+<a href="{{ url_for('cadastrar_talhao') }}" class="botao">
+    Cadastrar novo talhão
+</a>
+
+
+</div>
+
+<div class="tabela-container">
+
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Área (ha)</th>
+            <th>Cultura</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for talhao in talhoes %}
+
+        <tr>
+            <td>{{ talhao.nome }}</td>
+            <td>{{ talhao.area }}</td>
+            <td>{{ talhao.cultura }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+
+</div>
+
+{% endblock %}

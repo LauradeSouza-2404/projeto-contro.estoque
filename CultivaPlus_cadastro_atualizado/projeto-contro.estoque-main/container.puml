@@ -1,0 +1,30 @@
+@startuml
+
+!include <C4/C4_Container>
+
+title Diagrama de Contêiner - Sistema de Controle de Estoque e Rastreabilidade
+
+Person(produtor, "Produtor Rural", "Responsável pelo cadastro dos lotes, controle dos insumos e registro das aplicações.")
+
+System_Ext(fiscalizacao, "Órgãos de Fiscalização", "Órgãos que podem receber informações e relatórios relacionados às aplicações e ao uso de insumos.")
+
+System_Boundary(sistema, "Sistema de Controle de Estoque e Rastreabilidade") {
+
+    Container(frontend, "Interface Web", "HTML / CSS", "Telas utilizadas pelo produtor para cadastrar lotes, controlar insumos, registrar aplicações e consultar informações.")
+
+    Container(backend, "Servidor Backend", "Python / Flask", "Processa as requisições, aplica as regras do sistema, controla o estoque e realiza a rastreabilidade dos lotes.")
+
+    ContainerDb(banco, "Banco de Dados", "SQLite", "Armazena produtores, lotes, insumos, aplicações, estoque e informações de rastreabilidade.")
+}
+
+Rel(produtor, frontend, "Acessa as telas")
+
+Rel(frontend, backend, "Envia requisições HTTP")
+
+Rel(backend, frontend, "Retorna páginas e informações")
+
+Rel(backend, banco, "Consulta e armazena dados")
+
+Rel(backend, fiscalizacao, "Gera relatórios de rastreabilidade")
+
+@enduml
