@@ -435,7 +435,7 @@ def excluir_produto(produto_id):
 
 @app.route("/cadastro", methods=["GET", "POST"])
 def cadastro():
-        if request.method == "POST":
+           if request.method == "POST":
         nome = request.form["nome"]
         email = request.form["email"]
         senha = request.form["senha"]
@@ -453,6 +453,16 @@ def cadastro():
                 (nome, email, senha_hash)
             )
             conexao.commit()
+            flash("Cadastro realizado com sucesso!", "sucesso")
+            return redirect(url_for("login"))
+
+        except sqlite3.IntegrityError:
+            flash("Este e-mail já está cadastrado.", "erro")
+
+        finally:
+            conexao.close()
+
+    return render_template("cadastro.html")
             flash("Cadastro realizado com sucesso!", "sucesso")
             return redirect(url_for("login"))
 
