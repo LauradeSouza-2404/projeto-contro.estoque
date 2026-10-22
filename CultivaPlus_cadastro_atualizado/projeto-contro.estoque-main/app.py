@@ -439,6 +439,12 @@ def cadastro():
         nome = request.form["nome"]
         email = request.form["email"]
         senha = request.form["senha"]
+
+        # Exige no mínimo 8 caracteres antes de salvar o usuário.
+        if len(senha) < 8:
+            flash("A senha deve ter pelo menos 8 caracteres.", "erro")
+            return redirect(url_for("cadastro"))
+
         senha_hash = generate_password_hash(senha)
         conexao = conectar_banco()
         try:
