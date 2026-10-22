@@ -446,6 +446,11 @@ def cadastro():
                 "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)",
                 (nome, email, senha_hash)
             )
+            senha = request.form.get("senha", "")
+
+if len(senha) < 8:
+    flash("A senha deve ter pelo menos 8 caracteres.", "error")
+    return redirect(url_for("cadastro"))
             conexao.commit()
             flash("Cadastro realizado com sucesso!", "sucesso")
             return redirect(url_for("login"))
